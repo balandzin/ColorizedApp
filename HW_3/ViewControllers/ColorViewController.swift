@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class ColorViewController: UIViewController {
     
     @IBOutlet var colorfulLabel: UIView!
     
@@ -19,12 +19,16 @@ final class ViewController: UIViewController {
     @IBOutlet var blueSlider: UISlider!
     @IBOutlet var greenSlider: UISlider!
     
+    var color: UIColor!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         colorfulLabel.layer.cornerRadius = 25
         
-        changeColor()
+        colorfulLabel.backgroundColor = color
+        
+        //redSlider.value = 
         
         redValueLabel.text = string(from: redSlider)
         greenValueLabel.text = string(from: greenSlider)
