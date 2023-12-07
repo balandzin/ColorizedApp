@@ -19,20 +19,17 @@ final class ColorViewController: UIViewController {
     @IBOutlet var blueSlider: UISlider!
     @IBOutlet var greenSlider: UISlider!
     
-    var color: UIColor!
+    var startBackgroundColor: UIColor!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         colorfulLabel.layer.cornerRadius = 25
         
-        colorfulLabel.backgroundColor = color
+        colorfulLabel.backgroundColor = startBackgroundColor
         
-        //redSlider.value = 
-        
-        redValueLabel.text = string(from: redSlider)
-        greenValueLabel.text = string(from: greenSlider)
-        blueValueLabel.text = string(from: blueSlider)
+        setValueColor(for: redSlider, greenSlider, blueSlider)
+        setValueText(for: redValueLabel, greenValueLabel, blueValueLabel)
     }
     
     @IBAction func sliderAction(_ sender: UISlider) {
@@ -40,11 +37,11 @@ final class ColorViewController: UIViewController {
         
         switch sender {
         case redSlider:
-            redValueLabel.text = string(from: redSlider)
+            setValueText(for: redValueLabel)
         case greenSlider:
-            greenValueLabel.text = string(from: greenSlider)
+            setValueText(for: greenValueLabel)
         default:
-            blueValueLabel.text = string(from: blueSlider)
+            setValueText(for: blueValueLabel)
         }
     }
     
@@ -57,8 +54,28 @@ final class ColorViewController: UIViewController {
         )
     }
     
-    private func string(from slider: UISlider) -> String {
-        String(format: "%.2f", slider.value)
+    private func setValueColor(for sliders: UISlider...) {
+            let color = CIColor(color: startBackgroundColor)
+            sliders.forEach { slider in
+                switch slider {
+                case redSlider: redSlider.value = Float(color.red)
+                case greenSlider: greenSlider.value = Float(color.green)
+                case blueSlider: blueSlider.value = Float(color.blue)
+                default: break
+                }
+            }
+        }
+    
+    private func setValueText(for labels: UILabel...) {
+        labels.forEach { label in
+            switch label {
+            case redValueLabel: redValueLabel.text = String(format: "%.2f", redSlider.value)
+            case greenValueLabel: greenValueLabel.text = String(format: "%.2f", greenSlider.value)
+            case blueValueLabel: blueValueLabel.text = String(format: "%.2f", blueSlider.value)
+            default: break
+            }
+        }
     }
+
 }
 
