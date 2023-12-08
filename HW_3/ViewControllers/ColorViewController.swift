@@ -47,7 +47,6 @@ final class ColorViewController: UIViewController {
         }
     }
     
-    
     @IBAction func doneButtonAction() {
         delegate.setBackgroundColor(colorfulLabel.backgroundColor ?? .yellow)
         dismiss(animated: true)
@@ -84,6 +83,5 @@ final class ColorViewController: UIViewController {
             }
         }
     }
-
 }
 
