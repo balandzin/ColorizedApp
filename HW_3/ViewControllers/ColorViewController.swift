@@ -19,6 +19,8 @@ final class ColorViewController: UIViewController {
     @IBOutlet var blueSlider: UISlider!
     @IBOutlet var greenSlider: UISlider!
     
+    weak var delegate: ColorViewControllerDelegate!
+    
     var startBackgroundColor: UIColor!
     
     override func viewDidLoad() {
@@ -43,6 +45,12 @@ final class ColorViewController: UIViewController {
         default:
             setValueText(for: blueValueLabel)
         }
+    }
+    
+    
+    @IBAction func doneButtonAction() {
+        delegate.setBackgroundColor(colorfulLabel.backgroundColor ?? .yellow)
+        dismiss(animated: true)
     }
     
     private func changeColor() {
